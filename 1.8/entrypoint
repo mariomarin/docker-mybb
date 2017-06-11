@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+confd -onetime -backend env
+
+if [[ "$INSTALL_COMPLETE" == true ]]; then
+	touch /var/www/html/install/lock
+fi
+
+exec "$@"

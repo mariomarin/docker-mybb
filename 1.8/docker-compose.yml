@@ -1,0 +1,30 @@
+version: "2"
+services:
+  mybb:
+    image: mariomarin/mybb:1.8
+    build:
+      context: .
+    ports:
+      - "80:80"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=mybb
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=mybb
+      - AWS_REGION=${AWS_DEFAULT_REGION}
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+    depends_on:
+      - db
+  db:
+    image: mysql
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_USER=mybb
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=mybb
+      - MYSQL_ROOT_PASSWORD=password
+
+volumes:
+  db-data:

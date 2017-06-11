@@ -1,0 +1,8 @@
+[template]
+mode = "0666"
+src = "config.php.tmpl"
+dest = "/var/www/html/inc/config.php"
+separator = "."
+keys = [
+  "password"
+]
